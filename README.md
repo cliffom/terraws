@@ -37,3 +37,5 @@ aws configure
 terraform plan
 terraform apply
 ```
+
+When `terraform apply` is complete, you will see `elb_dns_name` with a value in the output. After a few moments that DNS name will respond to HTTP GET requests with the expected output outlined above.
