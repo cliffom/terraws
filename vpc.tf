@@ -1,7 +1,7 @@
 resource "aws_vpc" "terraws" {
-  cidr_block            = "10.0.0.0/16"
-  enable_dns_support    = true
-  enable_dns_hostnames  = true
+  cidr_block           = "10.0.0.0/16"
+  enable_dns_support   = true
+  enable_dns_hostnames = true
 }
 
 resource "aws_internet_gateway" "terraws" {
@@ -9,9 +9,9 @@ resource "aws_internet_gateway" "terraws" {
 }
 
 resource "aws_route" "default" {
-  route_table_id          = "${aws_vpc.terraws.main_route_table_id}"
-  destination_cidr_block  = "0.0.0.0/0"
-  gateway_id              = "${aws_internet_gateway.terraws.id}"
+  route_table_id         = "${aws_vpc.terraws.main_route_table_id}"
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = "${aws_internet_gateway.terraws.id}"
 }
 
 # Create subnets for load balancers

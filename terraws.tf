@@ -7,6 +7,7 @@ resource "aws_launch_configuration" "web" {
   image_id        = "ami-55ef662f"
   instance_type   = "t2.micro"
   security_groups = ["${aws_security_group.web.id}"]
+
   user_data = <<-EOF
     #!/bin/bash
     yum update -y
@@ -36,18 +37,19 @@ resource "aws_launch_configuration" "web" {
 
     docker run --name nginx -d -v $NGINX_ROOT:$NGINX_ROOT -p 8080:80 nginx
     EOF
+
   lifecycle {
     create_before_destroy = true
   }
 }
 
 resource "aws_autoscaling_group" "web" {
-  launch_configuration  = "${aws_launch_configuration.web.id}"
-  vpc_zone_identifier   = ["${aws_subnet.web-us-east-1a.id}", "${aws_subnet.web-us-east-1b.id}", "${aws_subnet.web-us-east-1c.id}"]
-  min_size              = 3
-  max_size              = 6
-  load_balancers        = ["${aws_elb.web.name}"]
-  health_check_type     = "ELB"
+  launch_configuration = "${aws_launch_configuration.web.id}"
+  vpc_zone_identifier  = ["${aws_subnet.web-us-east-1a.id}", "${aws_subnet.web-us-east-1b.id}", "${aws_subnet.web-us-east-1c.id}"]
+  min_size             = 3
+  max_size             = 6
+  load_balancers       = ["${aws_elb.web.name}"]
+  health_check_type    = "ELB"
 }
 
 resource "aws_elb" "web" {
@@ -62,6 +64,7 @@ resource "aws_elb" "web" {
     interval            = 30
     target              = "HTTP:8080/"
   }
+
   listener {
     lb_port           = 80
     lb_protocol       = "http"
