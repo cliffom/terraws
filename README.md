@@ -23,15 +23,16 @@ The following AWS services are created:
   * Routing Table
 
 ## Getting started
-1. Clone this repo
-2. Install [Terraform](https://www.terraform.io/downloads.html)
-3. Install [AWS CLI](http://docs.aws.amazon.com/cli/latest/userguide/installing.html)
+1. Install [Terraform](https://www.terraform.io/downloads.html)
+2. Install [AWS CLI](http://docs.aws.amazon.com/cli/latest/userguide/installing.html)
+3. Clone this repo
 4. Configure the AWS CLI with your AWS credentials
 5. Execute the Terraform plan
 
 ```sh
-git clone git@github.com:cliffom/terraws.git
 brew install terraform awscli
+git clone git@github.com:cliffom/terraws.git
+cd terraws
 aws configure
 terraform plan
 terraform apply
