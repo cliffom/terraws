@@ -18,7 +18,7 @@ resource "aws_launch_configuration" "web" {
     AWS_META_BASE=http://169.254.169.254/latest/meta-data
     COMMAND_BASE="curl -s $AWS_META_BASE"
     NGINX_ROOT=/usr/share/nginx/html
-    INDEX_FILE=/usr/share/nginx/html/index.html
+    INDEX_FILE=$NGINX_ROOT/index.html
     mkdir -p $NGINX_ROOT
 
     INSTANCE_ID=`$COMMAND_BASE/instance-id`
